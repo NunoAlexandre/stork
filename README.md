@@ -101,7 +101,7 @@ let maybeUser: User? = User.from(json: userJSON)
 let users: [User] = [User].from(jsonList: usersJSON)
 ```
 
-See more, unit-tested examples at the [Examples directory](stork/tree/master/Stork/StorkTests/Examples)
+See more, unit-tested examples at the [Examples directory](/Stork/StorkTests/Examples)
 
 ## Installation
 
