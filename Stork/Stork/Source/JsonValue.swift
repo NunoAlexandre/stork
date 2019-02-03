@@ -21,6 +21,10 @@ enum JsonValue {
     return self.ifInt(id)
   }
 
+  func doubleValue() -> Double? {
+    return self.ifDouble(id)
+  }
+
   func stringValue() -> String? {
     return self.ifString(id)
   }
@@ -38,6 +42,15 @@ enum JsonValue {
     switch self {
     case .int(let int):
       return apply(int)
+    default:
+      return nil
+    }
+  }
+
+  func ifDouble<T>(_ apply: (Double) -> T) -> T? {
+    switch self {
+    case .double(let double):
+      return apply(double)
     default:
       return nil
     }

@@ -9,6 +9,7 @@ class FilmExampleTest: XCTestCase {
       , "yearOfRelease": 1972
       , "actors": ["Al Pacino", "Marlon Brando"]
       , "languages": ["english", "italian", "latin"]
+      , "imdbRating": 9.2
       ]
 
     if let film = Film.from(json: film) {
@@ -18,6 +19,8 @@ class FilmExampleTest: XCTestCase {
       XCTAssertEqual(film.actors, [Actor(name: "Al Pacino"),
                                    Actor(name: "Marlon Brando")])
       XCTAssertEqual(film.isKidsProof, false)
+      XCTAssertEqual(film.imdbRating, 9.2)
+
     }
     else {
       XCTFail("The JSON object failed to be decoded to 'Film'")
@@ -58,6 +61,7 @@ struct Film {
   let actors: [Actor]
   let languages: [Language]
   let isKidsProof: Bool
+  let imdbRating: Double?
 }
 
 enum Genre: String {
@@ -89,7 +93,8 @@ extension Film: FromJson {
         yearOfRelease: try json .! "yearOfRelease",
         actors:        try json ..! "actors",
         languages:     try json ..! "languages",
-        isKidsProof:   (json .? "isKidsProof") ?? false
+        isKidsProof:   (json .? "isKidsProof") ?? false,
+        imdbRating:    json .? "imdbRating"
       )
     }
   }

@@ -41,6 +41,8 @@ func decodeValue<T>(_ value: Any) -> T? where T: FromJson {
     return T.from(value: .boolean(value as! Bool))
   case is Int:
     return T.from(value: .int(value as! Int))
+  case is Double:
+    return T.from(value: .double(value as! Double))
   case is String:
     return T.from(value: .string(value as! String))
   case is JSON:

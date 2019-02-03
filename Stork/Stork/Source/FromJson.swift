@@ -32,11 +32,18 @@ extension Int: FromJson {
   }
 }
 
+extension Double: FromJson {
+  static func from(value: JsonValue) -> Double? {
+    return value.doubleValue()
+  }
+}
+
 extension Array where Element: FromJson {
   static func from(jsonList: [JSON]) -> [Element] {
     return jsonList.compactMap(Element.from(json:))
   }
 }
+
 
 
 typealias JSON = [String: Any]
