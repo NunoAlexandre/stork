@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC0E9AFE2207807C002DC961 /* UserExampleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0E9AFD2207807C002DC961 /* UserExampleTest.swift */; };
 		BC2F4CA1220620C60019095B /* Stork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2F4C97220620C60019095B /* Stork.framework */; };
 		BC2F4CA6220620C60019095B /* StorkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F4CA5220620C60019095B /* StorkTests.swift */; };
 		BC2F4CA8220620C60019095B /* Stork.h in Headers */ = {isa = PBXBuildFile; fileRef = BC2F4C9A220620C60019095B /* Stork.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BC0E9AFD2207807C002DC961 /* UserExampleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExampleTest.swift; sourceTree = "<group>"; };
 		BC2F4C97220620C60019095B /* Stork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Stork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC2F4C9A220620C60019095B /* Stork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Stork.h; sourceTree = "<group>"; };
 		BC2F4C9B220620C60019095B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				BC6F1FD2220630A900254714 /* FilmExampleTest.swift */,
+				BC0E9AFD2207807C002DC961 /* UserExampleTest.swift */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 				BC6F1FD02206236D00254714 /* Decode.swift in Sources */,
 				BC2F4CA6220620C60019095B /* StorkTests.swift in Sources */,
 				BC6F1FCA2206236D00254714 /* JsonValue.swift in Sources */,
+				BC0E9AFE2207807C002DC961 /* UserExampleTest.swift in Sources */,
 				BC6F1FCE2206236D00254714 /* FromJson.swift in Sources */,
 				BC6F1FD3220630A900254714 /* FilmExampleTest.swift in Sources */,
 			);
