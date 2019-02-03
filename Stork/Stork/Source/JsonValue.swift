@@ -25,19 +25,19 @@ enum JsonValue {
     return self.ifString(id)
   }
 
-  func ifBool<T>(_ apply: (Bool) throws -> T) -> T? {
+  func ifBool<T>(_ apply: (Bool) -> T) -> T? {
     switch self {
     case .boolean(let bool):
-      return try? apply(bool)
+      return apply(bool)
     default:
       return nil
     }
   }
 
-  func ifInt<T>(_ apply: (Int) throws -> T) -> T? {
+  func ifInt<T>(_ apply: (Int) -> T) -> T? {
     switch self {
     case .int(let int):
-      return try? apply(int)
+      return apply(int)
     default:
       return nil
     }
@@ -52,10 +52,10 @@ enum JsonValue {
     }
   }
 
-  func ifString<T>(_ apply: (String) throws -> T) -> T? {
+  func ifString<T>(_ apply: (String) -> T) -> T? {
     switch self {
     case .string(let str):
-      return try? apply(str)
+      return apply(str)
     default:
       return nil
     }
@@ -64,4 +64,14 @@ enum JsonValue {
 
 func id<T>(_ value: T) -> T {
   return value
+}
+
+extension Optional {
+  func orThrow(_ throwError: () -> Error) throws -> Wrapped {
+    guard let value = self else {
+      throw throwError()
+    }
+
+    return value
+  }
 }

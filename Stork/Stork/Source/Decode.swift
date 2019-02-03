@@ -18,8 +18,10 @@ func .?<T>(json: JSON, key: String) -> T? where T: FromJson {
   return json[key].flatMap(decodeValue)
 }
 
-func .!<T>(json: JSON, key: String) -> T where T: FromJson {
-  return (json .? key)!
+func .!<T>(json: JSON, key: String) throws -> T where T: FromJson {
+  return try (json .? key).orThrow {
+    StorkDecodeError.coulNotDecode(field: key)
+  }
 }
 
 func ..?<T>(json: JSON, key: String) -> [T]? where T: FromJson {
@@ -29,8 +31,8 @@ func ..?<T>(json: JSON, key: String) -> [T]? where T: FromJson {
     }
 }
 
-func ..!<T>(json: JSON, key: String) -> [T] where T: FromJson {
-  return (json ..? key)!
+func ..!<T>(json: JSON, key: String) throws -> [T] where T: FromJson {
+  return try (json ..? key).orThrow { StorkDecodeError.coulNotDecode(field: key) }
 }
 
 func decodeValue<T>(_ value: Any) -> T? where T: FromJson {
@@ -46,4 +48,8 @@ func decodeValue<T>(_ value: Any) -> T? where T: FromJson {
   default:
     return nil
   }
+}
+
+enum StorkDecodeError: Error {
+  case coulNotDecode(field: String)
 }

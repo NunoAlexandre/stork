@@ -22,7 +22,30 @@ class FilmExampleTest: XCTestCase {
     else {
       XCTFail("The JSON object failed to be decoded to 'Film'")
     }
+  }
 
+  func testFilmFromJsonWithMissingField() {
+    /// Confirm that when a JSON with a missing required
+    /// fields is given, nil is obtained on decoding that value.
+    let malformedFilm: JSON = [:]
+
+    let maybeFilm = Film.from(json: malformedFilm)
+    XCTAssertNil(maybeFilm)
+  }
+
+  func testFilmFromJsonWithTypeMismatch() {
+    /// Confirm that when a JSON with a type mismatch
+    /// is given, nil is obtained on decoding that value.
+    let malformedFilm: JSON =
+      [ "title": "The Godfather"
+      , "genres": 123             // expected to be a [String]
+      , "yearOfRelease": "Hello"  // expected to be Int
+      , "actorz": [1,2,3]         // expected to be [String]
+      , "languages": false        // expected to be [String]
+      ]
+
+    let maybeFilm = Film.from(json: malformedFilm)
+    XCTAssertNil(maybeFilm)
   }
 }
 
@@ -61,11 +84,11 @@ extension Film: FromJson {
   static func from(value: JsonValue) -> Film? {
     return value.ifObject { json in
       return Film(
-        title:         json .! "title",
-        genres:        json ..! "genres",
-        yearOfRelease: json .! "yearOfRelease",
-        actors:        (json ..! "actors"),
-        languages:     json ..! "languages",
+        title:         try json .! "title",
+        genres:        try json ..! "genres",
+        yearOfRelease: try json .! "yearOfRelease",
+        actors:        try json ..! "actors",
+        languages:     try json ..! "languages",
         isKidsProof:   (json .? "isKidsProof") ?? false
       )
     }
