@@ -9,6 +9,7 @@ protocol FromJson {
 }
 
 extension FromJson {
+
   static func from(json: JSON) -> Self? {
     return Self.from(value: .object(json))
   }
@@ -44,6 +45,20 @@ extension Array where Element: FromJson {
   }
 }
 
+extension FromJson where Self: RawRepresentable, Self.RawValue == Int {
+  static func from(value: JsonValue) -> Self? {
+    return value
+      .intValue()
+      .flatMap(self.init(rawValue:))
+  }
+}
 
+extension FromJson where Self: RawRepresentable, Self.RawValue == String {
+  static func from(value: JsonValue) -> Self? {
+    return value
+      .stringValue()
+      .flatMap(self.init(rawValue:))
+  }
+}
 
 typealias JSON = [String: Any]
