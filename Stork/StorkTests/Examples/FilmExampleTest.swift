@@ -110,7 +110,7 @@ extension Actor: FromJson {
 
 extension Language: FromJson {
   static func from(value: JsonValue) -> Language? {
-    return value.stringValue().flatMap { str in
+    return value.ifString { str in
       switch str {
       case "en":  return .english
       case "it":  return .italian

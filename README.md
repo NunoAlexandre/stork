@@ -86,7 +86,7 @@ extension Subscription: FromJson {}
 // thus needs to be translated to the right Country case.
 extension Country: FromJson {
   static func from(value: JsonValue) -> Country? {
-    return value.stringValue().flatMap { str in
+    return value.ifString { str in
       switch str {
       case "nl": return .netherlands
       case "pt": return .portugal
