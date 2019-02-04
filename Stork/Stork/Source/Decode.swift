@@ -20,7 +20,7 @@ func .?<T>(json: JSON, key: String) -> T? where T: FromJson {
 
 func .!<T>(json: JSON, key: String) throws -> T where T: FromJson {
   return try (json .? key).orThrow {
-    StorkDecodeError.coulNotDecode(field: key)
+    StorkDecodeError.couldNotDecode(field: key)
   }
 }
 
@@ -32,7 +32,7 @@ func ..?<T>(json: JSON, key: String) -> [T]? where T: FromJson {
 }
 
 func ..!<T>(json: JSON, key: String) throws -> [T] where T: FromJson {
-  return try (json ..? key).orThrow { StorkDecodeError.coulNotDecode(field: key) }
+  return try (json ..? key).orThrow { StorkDecodeError.couldNotDecode(field: key) }
 }
 
 func decodeValue<T>(_ value: Any) -> T? where T: FromJson {
@@ -53,5 +53,5 @@ func decodeValue<T>(_ value: Any) -> T? where T: FromJson {
 }
 
 enum StorkDecodeError: Error {
-  case coulNotDecode(field: String)
+  case couldNotDecode(field: String)
 }
