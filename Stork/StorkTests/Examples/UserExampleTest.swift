@@ -6,6 +6,7 @@ class UserExampleTest: XCTestCase {
     let user: JSON =
       [ "id": 123
       , "name": "Nuno"
+      , "country": "nl"
       , "subscription": "free"
       , "favouriteSongs":
         [
@@ -25,6 +26,7 @@ class UserExampleTest: XCTestCase {
       XCTAssertEqual(user.id, 123)
       XCTAssertEqual(user.name, "Nuno")
       XCTAssertEqual(user.email, nil)
+      XCTAssertEqual(user.country, Country.netherlands)
       XCTAssertEqual(user.subscription, Subscription.free)
       XCTAssertEqual(
         user.favouriteSongs,
@@ -47,6 +49,7 @@ struct User {
   let id: Int
   let name: String
   let email: String?
+  let country: Country?
   let subscription: Subscription
   let favouriteSongs: [Song]
 }
@@ -56,6 +59,11 @@ enum Subscription: String {
   case bronze
   case silver
   case gold
+}
+
+enum Country: String {
+  case netherlands
+  case portugal
 }
 
 struct Song: Equatable {
@@ -73,6 +81,7 @@ extension User: FromJson {
         id:             try json .! "id",
         name:           try json .! "name",
         email:          json .? "email",
+        country:        json .? "country",
         subscription:   try json .! "subscription",
         favouriteSongs: (json ..? "favouriteSongs") ?? []
       )
@@ -80,11 +89,18 @@ extension User: FromJson {
   }
 }
 
-extension Subscription: FromJson {
-  static func from(value: JsonValue) -> Subscription? {
-    return value
-      .stringValue()
-      .flatMap(Subscription.init(rawValue:))
+// That's all!
+extension Subscription: FromJson {}
+
+extension Country: FromJson {
+  static func from(value: JsonValue) -> Country? {
+    return value.stringValue().flatMap { str in
+      switch str {
+      case "nl": return .netherlands
+      case "pt": return .portugal
+      default:   return nil
+      }
+    }
   }
 }
 

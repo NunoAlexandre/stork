@@ -8,7 +8,7 @@ class FilmExampleTest: XCTestCase {
       , "genres": ["crime", "drama"]
       , "yearOfRelease": 1972
       , "actors": ["Al Pacino", "Marlon Brando"]
-      , "languages": ["english", "italian", "latin"]
+      , "languages": ["en", "it", "lat"]
       , "imdbRating": 9.2
       ]
 
@@ -18,9 +18,9 @@ class FilmExampleTest: XCTestCase {
       XCTAssertEqual(film.yearOfRelease, 1972)
       XCTAssertEqual(film.actors, [Actor(name: "Al Pacino"),
                                    Actor(name: "Marlon Brando")])
+      XCTAssertEqual(film.languages, [.english, .italian, .latin])
       XCTAssertEqual(film.isKidsProof, false)
       XCTAssertEqual(film.imdbRating, 9.2)
-
     }
     else {
       XCTFail("The JSON object failed to be decoded to 'Film'")
@@ -100,13 +100,7 @@ extension Film: FromJson {
   }
 }
 
-extension Genre: FromJson {
-  static func from(value: JsonValue) -> Genre? {
-    return value
-      .stringValue()
-      .flatMap(Genre.init(rawValue:))
-  }
-}
+extension Genre: FromJson {}
 
 extension Actor: FromJson {
   static func from(value: JsonValue) -> Actor? {
@@ -116,8 +110,15 @@ extension Actor: FromJson {
 
 extension Language: FromJson {
   static func from(value: JsonValue) -> Language? {
-    return value
-      .stringValue()
-      .flatMap(Language.init(rawValue:))
+    return value.stringValue().flatMap { str in
+      switch str {
+      case "en":  return .english
+      case "it":  return .italian
+      case "lat": return .latin
+      case "pt":  return .portuguese
+      case "nl":  return .dutch
+      default:    return nil
+      }
+    }
   }
 }
