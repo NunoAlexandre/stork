@@ -37,6 +37,7 @@ struct User {
   let id: Int
   let name: String
   let email: String?
+  let country: Country?
   let subscription: Subscription
   let favouriteSongs: [Song]
 }
@@ -48,7 +49,12 @@ enum Subscription: String {
   case gold
 }
 
-struct Song {
+enum Country: String {
+  case netherlands
+  case portugal
+}
+
+struct Song: Equatable {
   let name: String
   let band: String
 }
@@ -64,6 +70,7 @@ extension User: FromJson {
         id:             try json .! "id",
         name:           try json .! "name",
         email:          json .? "email",
+        country:        json .? "country",
         subscription:   try json .! "subscription",
         favouriteSongs: (json ..? "favouriteSongs") ?? []
       )
@@ -71,11 +78,21 @@ extension User: FromJson {
   }
 }
 
-extension Subscription: FromJson {
-  static func from(value: JsonValue) -> Subscription? {
-    return value
-      .stringValue()
-      .flatMap(Subscription.init(rawValue:))
+// That's all you need for String/Int RawRepresentable Enums!
+extension Subscription: FromJson {}
+
+// Or you get to say how it's done!
+// In this case, the country in JSON is short-coded and
+// thus needs to be translated to the right Country case.
+extension Country: FromJson {
+  static func from(value: JsonValue) -> Country? {
+    return value.stringValue().flatMap { str in
+      switch str {
+      case "nl": return .netherlands
+      case "pt": return .portugal
+      default:   return nil
+      }
+    }
   }
 }
 

@@ -89,9 +89,12 @@ extension User: FromJson {
   }
 }
 
-// That's all!
+// That's all you need for String/Int RawRepresentable Enums!
 extension Subscription: FromJson {}
 
+// Or you get to say how it's done!
+// In this case, the country in JSON is short-coded and
+// thus needs to be translated to the right Country case.
 extension Country: FromJson {
   static func from(value: JsonValue) -> Country? {
     return value.stringValue().flatMap { str in
