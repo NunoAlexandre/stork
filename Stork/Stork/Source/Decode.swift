@@ -26,13 +26,14 @@ func .!<T>(json: JSON, key: String) throws -> T where T: FromJson {
 
 func ..?<T>(json: JSON, key: String) -> [T]? where T: FromJson {
   return json[key]
-    .map { value in
-      (value as? Array<Any>)?.compactMap(decodeValue) ?? []
-    }
+    .flatMap{ $0 as? Array<Any> }
+    .map { $0.compactMap(decodeValue) }
 }
 
 func ..!<T>(json: JSON, key: String) throws -> [T] where T: FromJson {
-  return try (json ..? key).orThrow { StorkDecodeError.couldNotDecode(field: key) }
+  return try
+    (json ..? key)
+    .orThrow { StorkDecodeError.couldNotDecode(field: key) }
 }
 
 func decodeValue<T>(_ value: Any) -> T? where T: FromJson {

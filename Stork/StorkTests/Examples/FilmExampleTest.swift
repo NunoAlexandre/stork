@@ -36,19 +36,66 @@ class FilmExampleTest: XCTestCase {
     XCTAssertNil(maybeFilm)
   }
 
-  func testFilmFromJsonWithTypeMismatch() {
+  func testFilmFromJsonWithTypeMismatchOnTitle() {
     /// Confirm that when a JSON with a type mismatch
     /// is given, nil is obtained on decoding that value.
     let malformedFilm: JSON =
-      [ "title": "The Godfather"
-      , "genres": 123             // expected to be a [String]
-      , "yearOfRelease": "Hello"  // expected to be Int
-      , "actorz": [1,2,3]         // expected to be [String]
-      , "languages": false        // expected to be [String]
+      [ "title": 1928 // expected to be a String
+      , "genres": ["crime", "drama"]
+      , "yearOfRelease": 1972
+      , "actors": ["Al Pacino", "Marlon Brando"]
+      , "languages": ["en", "it", "lat"]
+      , "imdbRating": 9.2
       ]
 
     let maybeFilm = Film.from(json: malformedFilm)
     XCTAssertNil(maybeFilm)
+  }
+
+  func testFilmFromJsonWithTypeMismatchOnArray() {
+    /// Confirm that when a JSON with a type mismatch
+    /// on an array, nil is obtained on decoding that value.
+    let malformedFilm: JSON =
+      [ "title": "The Godfather"
+      , "genres": 123 // expected to be [String]
+      , "yearOfRelease": 1972
+      , "actors": ["Al Pacino", "Marlon Brando"]
+      , "languages": ["en", "it", "lat"]
+      , "imdbRating": 9.2
+      ]
+
+    let maybeFilm = Film.from(json: malformedFilm)
+    XCTAssertNil(maybeFilm)
+  }
+
+  func testFilmFromJsonWithTypeMismatchOnArrayElements() {
+    /// Confirm that when a JSON with a type mismatch
+    /// on the array elements type, an empty array is
+    // obtained instead. This is not ideal but for now
+    // it works this way and must be tested.
+    let malformedFilm: JSON =
+      [ "title": "The Godfather"
+      , "genres": [1,2,3] // expected to be [String]
+      , "yearOfRelease": 1972
+      , "actors": ["Al Pacino", "Marlon Brando"]
+      , "languages": ["en", "it", "lat"]
+      , "imdbRating": 9.2
+      ]
+
+    if let film = Film.from(json: malformedFilm) {
+      XCTAssertEqual(film.title, "The Godfather")
+      XCTAssertEqual(film.genres, [])
+      XCTAssertEqual(film.yearOfRelease, 1972)
+      XCTAssertEqual(film.actors, [Actor(name: "Al Pacino"),
+                                   Actor(name: "Marlon Brando")])
+      XCTAssertEqual(film.languages, [.english, .italian, .latin])
+      XCTAssertEqual(film.isKidsProof, false)
+      XCTAssertEqual(film.imdbRating, 9.2)
+    }
+    else {
+      XCTFail("The JSON object failed to be decoded to 'Film'")
+    }
+
   }
 }
 
