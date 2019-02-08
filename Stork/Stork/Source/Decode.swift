@@ -37,20 +37,8 @@ func ..!<T>(json: JSON, key: String) throws -> [T] where T: FromJson {
 }
 
 func decodeValue<T>(_ value: Any) -> T? where T: FromJson {
-  switch value {
-  case is Bool:
-    return T.from(value: .boolean(value as! Bool))
-  case is Int:
-    return T.from(value: .int(value as! Int))
-  case is Double:
-    return T.from(value: .double(value as! Double))
-  case is String:
-    return T.from(value: .string(value as! String))
-  case is JSON:
-    return T.from(value: .object(value as! JSON))
-  default:
-    return nil
-  }
+  return JsonValue(fromAny: value)
+    .flatMap(T.from(value:))
 }
 
 enum StorkDecodeError: Error {
