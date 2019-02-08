@@ -126,7 +126,7 @@ You can add Stork as a dependency to your project via the following ways.
 
 #### Git Submodules
 
-``` bash```
+``` bash
 # Add Stork as a git submodule to your repository
 git submodule add git@github.com:NunoAlexandre/stork.git
 ```
