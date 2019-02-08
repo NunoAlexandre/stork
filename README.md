@@ -114,8 +114,8 @@ Now that we have everything, let's get Stork to deliver that baby:
 // Single user
 let maybeUser: User? = User.from(json: userJSON)
 
-// List of users
-let users: [User] = [User].from(jsonList: usersJSON)
+// Array of users
+let users: [User] = [User].from(jsonArray: usersJSON)
 ```
 
 See more, unit-tested examples at the [Examples directory](/Stork/StorkTests/Examples)

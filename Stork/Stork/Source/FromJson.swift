@@ -40,8 +40,8 @@ extension Double: FromJson {
 }
 
 extension Array where Element: FromJson {
-  static func from(jsonList: [JSON]) -> [Element] {
-    return jsonList.compactMap(Element.from(json:))
+  static func from(jsonArray: [JSON]) -> [Element] {
+    return jsonArray.compactMap(Element.from(json:))
   }
 }
 

@@ -11,7 +11,7 @@ enum JsonValue {
   case double(Double)
   case string(String)
   case object(JSON)
-  case list([JsonValue])
+  case array([JsonValue])
 
   func boolValue() -> Bool? {
     return self.ifBool(id)
