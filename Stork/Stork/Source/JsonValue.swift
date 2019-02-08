@@ -13,6 +13,23 @@ enum JsonValue {
   case object(JSON)
   case array([JsonValue])
 
+  init?(fromAny anyValue: Any) {
+    switch anyValue {
+    case let value as Bool:
+      self = .boolean(value)
+    case let value as Int:
+      self = .int(value)
+    case let value as Double:
+      self = .double(value)
+    case let value as String:
+      self = .string(value)
+    case let value as JSON:
+      self = .object(value)
+    default:
+      return nil
+    }
+  }
+
   func boolValue() -> Bool? {
     return self.ifBool(id)
   }
