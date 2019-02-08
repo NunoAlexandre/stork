@@ -122,6 +122,24 @@ See more, unit-tested examples at the [Examples directory](/Stork/StorkTests/Exa
 
 ## Installation
 
-- `TODO`: I [plan to support](https://github.com/NunoAlexandre/stork/issues/6) `CocoaPods`, `Carthage`, and the `Swift Package Manager`.
+You can add Stork as a dependency to your project via the following ways.
+
+#### Git Submodules
+
+``` bash```
+# Add Stork as a git submodule to your repository
+git submodule add git@github.com:NunoAlexandre/stork.git
+```
+
+``` bash
+# Get the most updated version of Stork
+git submodule update --remote
+```
+
+Read more about Git Submodules [here](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+
+#### TODO
+
+I [plan to support](https://github.com/NunoAlexandre/stork/issues/6) `CocoaPods`, `Carthage`, and the `Swift Package Manager`.
 
 Help is rather appreciated!
