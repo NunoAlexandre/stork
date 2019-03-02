@@ -1,3 +1,5 @@
+import Foundation
+
 /*
   Stork > FromJson
 
@@ -58,6 +60,14 @@ extension FromJson where Self: RawRepresentable, Self.RawValue == String {
     return value
       .stringValue()
       .flatMap(self.init(rawValue:))
+  }
+}
+
+extension URL: FromJson {
+  static func from(value: JsonValue) -> URL? {
+    return value
+      .stringValue()
+      .flatMap { URL(string: $0) }
   }
 }
 

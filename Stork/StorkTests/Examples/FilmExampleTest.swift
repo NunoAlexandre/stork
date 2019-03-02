@@ -10,17 +10,23 @@ class FilmExampleTest: XCTestCase {
       , "actors": ["Al Pacino", "Marlon Brando"]
       , "languages": ["en", "it", "lat"]
       , "imdbRating": 9.2
+      , "streamURL": "https://github.com/NunoAlexandre/stork"
       ]
 
-    if let film = Film.from(json: film) {
-      XCTAssertEqual(film.title, "The Godfather")
-      XCTAssertEqual(film.genres, [Genre.crime, Genre.drama])
-      XCTAssertEqual(film.yearOfRelease, 1972)
-      XCTAssertEqual(film.actors, [Actor(name: "Al Pacino"),
-                                   Actor(name: "Marlon Brando")])
-      XCTAssertEqual(film.languages, [.english, .italian, .latin])
-      XCTAssertEqual(film.isKidsProof, false)
-      XCTAssertEqual(film.imdbRating, 9.2)
+    if let parsedFilm = Film.from(json: film) {
+      XCTAssertEqual(
+        parsedFilm,
+        Film(
+          title: "The Godfather",
+          genres: [.crime, .drama],
+          yearOfRelease: 1972,
+          actors: [Actor(name: "Al Pacino"), Actor(name: "Marlon Brando")],
+          languages: [.english, .italian, .latin],
+          isKidsProof: false,
+          imdbRating: 9.2,
+          streamURL: URL(string: "https://github.com/NunoAlexandre/stork")!
+        )
+      )
     }
     else {
       XCTFail("The JSON object failed to be decoded to 'Film'")
@@ -46,6 +52,7 @@ class FilmExampleTest: XCTestCase {
       , "actors": ["Al Pacino", "Marlon Brando"]
       , "languages": ["en", "it", "lat"]
       , "imdbRating": 9.2
+      , "streamURL": "https://github.com/NunoAlexandre/stork"
       ]
 
     let maybeFilm = Film.from(json: malformedFilm)
@@ -62,6 +69,7 @@ class FilmExampleTest: XCTestCase {
       , "actors": ["Al Pacino", "Marlon Brando"]
       , "languages": ["en", "it", "lat"]
       , "imdbRating": 9.2
+      , "streamURL": "https://github.com/NunoAlexandre/stork"
       ]
 
     let maybeFilm = Film.from(json: malformedFilm)
@@ -80,17 +88,23 @@ class FilmExampleTest: XCTestCase {
       , "actors": ["Al Pacino", "Marlon Brando"]
       , "languages": ["en", "it", "lat"]
       , "imdbRating": 9.2
+      , "streamURL": "https://github.com/NunoAlexandre/stork"
       ]
 
-    if let film = Film.from(json: malformedFilm) {
-      XCTAssertEqual(film.title, "The Godfather")
-      XCTAssertEqual(film.genres, [])
-      XCTAssertEqual(film.yearOfRelease, 1972)
-      XCTAssertEqual(film.actors, [Actor(name: "Al Pacino"),
-                                   Actor(name: "Marlon Brando")])
-      XCTAssertEqual(film.languages, [.english, .italian, .latin])
-      XCTAssertEqual(film.isKidsProof, false)
-      XCTAssertEqual(film.imdbRating, 9.2)
+    if let parsedFilm = Film.from(json: malformedFilm) {
+      XCTAssertEqual(
+        parsedFilm,
+        Film(
+          title: "The Godfather",
+          genres: [],
+          yearOfRelease: 1972,
+          actors: [Actor(name: "Al Pacino"), Actor(name: "Marlon Brando")],
+          languages: [.english, .italian, .latin],
+          isKidsProof: false,
+          imdbRating: 9.2,
+          streamURL: URL(string: "https://github.com/NunoAlexandre/stork")!
+        )
+      )
     }
     else {
       XCTFail("The JSON object failed to be decoded to 'Film'")
@@ -101,7 +115,7 @@ class FilmExampleTest: XCTestCase {
 
 
 /// Model
-struct Film {
+struct Film: Equatable {
   let title: String
   let genres: [Genre]
   let yearOfRelease: Int
@@ -109,6 +123,7 @@ struct Film {
   let languages: [Language]
   let isKidsProof: Bool
   let imdbRating: Double?
+  let streamURL: URL
 }
 
 enum Genre: String {
@@ -141,7 +156,8 @@ extension Film: FromJson {
         actors:        try json ..! "actors",
         languages:     try json ..! "languages",
         isKidsProof:   (json .? "isKidsProof") ?? false,
-        imdbRating:    json .? "imdbRating"
+        imdbRating:    json .? "imdbRating",
+        streamURL:     try json .! "streamURL"
       )
     }
   }
