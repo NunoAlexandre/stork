@@ -1,3 +1,5 @@
+import Foundation
+
 /*
  Stork > JsonValue
 
@@ -8,19 +10,17 @@
 enum JsonValue {
   case boolean(Bool)
   case int(Int)
-  case double(Double)
+  case number(NSNumber)
   case string(String)
   case object(JSON)
   case array([JsonValue])
 
   init?(fromAny anyValue: Any) {
     switch anyValue {
-    case let value as Int:
-      self = .int(value)
-    case let value as Double:
-      self = .double(value)
-    case let value as Bool:
-      self = .boolean(value)
+    case let value as NSNumber:
+      self = value.isBool()
+        ? .boolean(value.boolValue)
+        : .number(value)
     case let value as String:
       self = .string(value)
     case let value as JSON:
@@ -34,12 +34,8 @@ enum JsonValue {
     return self.ifBool(id)
   }
 
-  func intValue() -> Int? {
-    return self.ifInt(id)
-  }
-
-  func doubleValue() -> Double? {
-    return self.ifDouble(id)
+  func numberValue() -> NSNumber? {
+    return self.ifNumber(id)
   }
 
   func stringValue() -> String? {
@@ -55,19 +51,10 @@ enum JsonValue {
     }
   }
 
-  func ifInt<T>(_ apply: (Int) -> T?) -> T? {
+  func ifNumber<T>(_ apply: (NSNumber) -> T?) -> T? {
     switch self {
-    case .int(let int):
-      return apply(int)
-    default:
-      return nil
-    }
-  }
-
-  func ifDouble<T>(_ apply: (Double) -> T?) -> T? {
-    switch self {
-    case .double(let double):
-      return apply(double)
+    case let .number(x):
+      return apply(x)
     default:
       return nil
     }

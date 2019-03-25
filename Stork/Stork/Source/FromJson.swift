@@ -31,13 +31,13 @@ extension Bool: FromJson {
 
 extension Int: FromJson {
   static func from(value: JsonValue) -> Int? {
-    return value.intValue()
+    return value.numberValue()?.intValue
   }
 }
 
 extension Double: FromJson {
   static func from(value: JsonValue) -> Double? {
-    return value.doubleValue()
+    return value.numberValue()?.doubleValue
   }
 }
 
@@ -50,7 +50,8 @@ extension Array where Element: FromJson {
 extension FromJson where Self: RawRepresentable, Self.RawValue == Int {
   static func from(value: JsonValue) -> Self? {
     return value
-      .intValue()
+      .numberValue()
+      .map { $0.intValue }
       .flatMap(self.init(rawValue:))
   }
 }

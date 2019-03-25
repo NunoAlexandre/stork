@@ -1,0 +1,13 @@
+{
+ "text": "Delivering types from JSON like a Stork",
+ "char": "a",
+ "true": true,
+ "false": false,
+ "zero": 0,
+ "one": 1,
+ "two": 2,
+ "int": 1299,
+ "zeroDouble": 0.0,
+ "oneDouble": 1.0,
+ "double": 62.8
+}

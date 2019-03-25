@@ -11,6 +11,7 @@
 		BC2F4CA1220620C60019095B /* Stork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2F4C97220620C60019095B /* Stork.framework */; };
 		BC2F4CA6220620C60019095B /* StorkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F4CA5220620C60019095B /* StorkTests.swift */; };
 		BC2F4CA8220620C60019095B /* Stork.h in Headers */ = {isa = PBXBuildFile; fileRef = BC2F4C9A220620C60019095B /* Stork.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BC3BBEF22249119700389CE7 /* XCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3BBEF12249119700389CE7 /* XCTest.swift */; };
 		BC6F1FC92206236D00254714 /* JsonValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6F1FC52206236C00254714 /* JsonValue.swift */; };
 		BC6F1FCA2206236D00254714 /* JsonValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6F1FC52206236C00254714 /* JsonValue.swift */; };
 		BC6F1FCD2206236D00254714 /* FromJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6F1FC72206236C00254714 /* FromJson.swift */; };
@@ -18,6 +19,9 @@
 		BC6F1FCF2206236D00254714 /* Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6F1FC82206236D00254714 /* Decode.swift */; };
 		BC6F1FD02206236D00254714 /* Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6F1FC82206236D00254714 /* Decode.swift */; };
 		BC6F1FD3220630A900254714 /* FilmExampleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6F1FD2220630A900254714 /* FilmExampleTest.swift */; };
+		BC8BE6C42247C5D100B7B32C /* types.json in Resources */ = {isa = PBXBuildFile; fileRef = BC8BE6C32247C5D100B7B32C /* types.json */; };
+		BC8BE6C62247C89700B7B32C /* FromJsonItegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8BE6C52247C89700B7B32C /* FromJsonItegrationTests.swift */; };
+		BC8BE6C92248085100B7B32C /* NSNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8BE6C82248085100B7B32C /* NSNumber.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,10 +42,14 @@
 		BC2F4CA0220620C60019095B /* StorkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StorkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC2F4CA5220620C60019095B /* StorkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorkTests.swift; sourceTree = "<group>"; };
 		BC2F4CA7220620C60019095B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC3BBEF12249119700389CE7 /* XCTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTest.swift; sourceTree = "<group>"; };
 		BC6F1FC52206236C00254714 /* JsonValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonValue.swift; sourceTree = "<group>"; };
 		BC6F1FC72206236C00254714 /* FromJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromJson.swift; sourceTree = "<group>"; };
 		BC6F1FC82206236D00254714 /* Decode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Decode.swift; sourceTree = "<group>"; };
 		BC6F1FD2220630A900254714 /* FilmExampleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmExampleTest.swift; sourceTree = "<group>"; };
+		BC8BE6C32247C5D100B7B32C /* types.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = types.json; sourceTree = "<group>"; };
+		BC8BE6C52247C89700B7B32C /* FromJsonItegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromJsonItegrationTests.swift; sourceTree = "<group>"; };
+		BC8BE6C82248085100B7B32C /* NSNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNumber.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,16 +102,28 @@
 		BC2F4CA4220620C60019095B /* StorkTests */ = {
 			isa = PBXGroup;
 			children = (
+				BC3BBEF02249117700389CE7 /* Extensions */,
+				BC8BE6C12247C56600B7B32C /* Integration */,
 				BC6F1FD12206305D00254714 /* Examples */,
+				BC8BE6C22247C57000B7B32C /* Resources */,
 				BC2F4CA5220620C60019095B /* StorkTests.swift */,
 				BC2F4CA7220620C60019095B /* Info.plist */,
 			);
 			path = StorkTests;
 			sourceTree = "<group>";
 		};
+		BC3BBEF02249117700389CE7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BC3BBEF12249119700389CE7 /* XCTest.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		BC6F1FC42206226400254714 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BC8BE6C72248084300B7B32C /* Extensions */,
 				BC6F1FC82206236D00254714 /* Decode.swift */,
 				BC6F1FC72206236C00254714 /* FromJson.swift */,
 				BC6F1FC52206236C00254714 /* JsonValue.swift */,
@@ -118,6 +138,30 @@
 				BC0E9AFD2207807C002DC961 /* UserExampleTest.swift */,
 			);
 			path = Examples;
+			sourceTree = "<group>";
+		};
+		BC8BE6C12247C56600B7B32C /* Integration */ = {
+			isa = PBXGroup;
+			children = (
+				BC8BE6C52247C89700B7B32C /* FromJsonItegrationTests.swift */,
+			);
+			path = Integration;
+			sourceTree = "<group>";
+		};
+		BC8BE6C22247C57000B7B32C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BC8BE6C32247C5D100B7B32C /* types.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		BC8BE6C72248084300B7B32C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BC8BE6C82248085100B7B32C /* NSNumber.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,6 +263,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC8BE6C42247C5D100B7B32C /* types.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +277,7 @@
 				BC6F1FC92206236D00254714 /* JsonValue.swift in Sources */,
 				BC6F1FCD2206236D00254714 /* FromJson.swift in Sources */,
 				BC6F1FCF2206236D00254714 /* Decode.swift in Sources */,
+				BC8BE6C92248085100B7B32C /* NSNumber.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,10 +287,12 @@
 			files = (
 				BC6F1FD02206236D00254714 /* Decode.swift in Sources */,
 				BC2F4CA6220620C60019095B /* StorkTests.swift in Sources */,
+				BC3BBEF22249119700389CE7 /* XCTest.swift in Sources */,
 				BC6F1FCA2206236D00254714 /* JsonValue.swift in Sources */,
 				BC0E9AFE2207807C002DC961 /* UserExampleTest.swift in Sources */,
 				BC6F1FCE2206236D00254714 /* FromJson.swift in Sources */,
 				BC6F1FD3220630A900254714 /* FilmExampleTest.swift in Sources */,
+				BC8BE6C62247C89700B7B32C /* FromJsonItegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
