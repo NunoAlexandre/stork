@@ -13,14 +13,8 @@ protocol FromJson {
 }
 ```
 
-In practice, this means that for a type to be parseable from JSON, it needs to provide a way of being constructed from a `JsonValue`, i.e., from either:
-
-- `String`
-- `Int`
-- `Double`
-- `Bool`
-- `JSON`  (i.e., `[String: Any]`)
-- `[JsonValue]`.
+In practice, this means that for a type to be parseable from JSON, it needs to provide a way of being constructed from a [JsonValue](/Stork/Stork/Source/JsonValue.swift):
+`string`, `number`, `bool`, `JSON`, or `[JsonValue`].
 
 At compile-time, Storks requires the types you want to get from JSON to be `FromJson` compliant. Otherwise, you encounter the following compile error message on Xcode:
 
