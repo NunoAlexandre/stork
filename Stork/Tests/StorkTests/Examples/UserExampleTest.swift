@@ -42,6 +42,9 @@ class UserExampleTest: XCTestCase {
       XCTFail("The JSON object failed to be decoded to 'User'")
     }
   }
+  static var allTests = [
+    ("testUserFromJson", testUserFromJson)
+  ]
 }
 
 
