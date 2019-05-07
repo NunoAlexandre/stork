@@ -92,6 +92,15 @@ class FromJsonItegrationTests: XCTestCase {
     XCTAssertEqual(json .? "oneDouble", 1)
     XCTAssertEqual(json .? "double", 62)
   }
+  
+  static var allTests = [
+    ("testFromJsonTypesParsing", testFromJsonTypesParsing),
+    ("testExpectingBoolFromNumber", testExpectingBoolFromNumber),
+    ("testExpectingIntFromBool", testExpectingIntFromBool),
+    ("testExpectingDoubleFromBool", testExpectingDoubleFromBool),
+    ("testExpectingDoubleFromInt", testExpectingDoubleFromInt),
+    ("testExpectingIntFromDouble", testExpectingIntFromDouble),
+  ]
 }
 
 struct Types: Equatable {
