@@ -113,6 +113,13 @@ class FilmExampleTest: XCTestCase {
     }
 
   }
+  static var allTests = [
+    ("testFilmFromJson", testFilmFromJson),
+    ("testFilmFromJsonWithMissingField", testFilmFromJsonWithMissingField),
+    ("testFilmFromJsonWithTypeMismatchOnTitle", testFilmFromJsonWithTypeMismatchOnTitle),
+    ("testFilmFromJsonWithTypeMismatchOnArray", testFilmFromJsonWithTypeMismatchOnArray),
+    ("testFilmFromJsonWithTypeMismatchOnArrayElements", testFilmFromJsonWithTypeMismatchOnArrayElements)
+  ]
 }
 
 
