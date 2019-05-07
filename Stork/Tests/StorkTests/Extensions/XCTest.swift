@@ -1,5 +1,7 @@
 import XCTest
 
+@testable import Stork
+
 extension XCTestCase {
   func getJSON(fromFile file: String) -> Any {
     let inventoryFileURL = Bundle(for: type(of: self)).url(

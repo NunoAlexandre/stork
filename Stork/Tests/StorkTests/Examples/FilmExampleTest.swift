@@ -1,5 +1,7 @@
 import XCTest
 
+@testable import Stork
+
 class FilmExampleTest: XCTestCase {
 
   func testFilmFromJson() {

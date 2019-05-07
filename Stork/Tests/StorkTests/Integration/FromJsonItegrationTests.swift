@@ -1,5 +1,7 @@
 import XCTest
 
+@testable import Stork
+
 /*
  When parsing real json, this data has potentially
  been coerced to 'Data' and then / or as a JSON,
