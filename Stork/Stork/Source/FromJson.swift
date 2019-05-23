@@ -41,6 +41,12 @@ extension Double: FromJson {
   }
 }
 
+extension Decimal: FromJson {
+  static func from(value: JsonValue) -> Decimal? {
+    return value.numberValue()?.decimalValue
+  }
+}
+
 extension Array where Element: FromJson {
   static func from(jsonArray: [JSON]) -> [Element] {
     return jsonArray.compactMap(Element.from(json:))
