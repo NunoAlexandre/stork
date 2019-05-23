@@ -14,23 +14,23 @@ infix operator .!   // Same as .? but expects the value to be present
 infix operator ..?  // Maybe get an array of scalar or custom types
 infix operator ..!  // Same as ..? but expects the array to be present
 
-func .?<T>(json: JSON, key: String) -> T? where T: FromJson {
+public func .?<T>(json: JSON, key: String) -> T? where T: FromJson {
   return json[key].flatMap(decodeValue)
 }
 
-func .!<T>(json: JSON, key: String) throws -> T where T: FromJson {
+public func .!<T>(json: JSON, key: String) throws -> T where T: FromJson {
   return try (json .? key).orThrow {
     StorkDecodeError.couldNotDecode(field: key)
   }
 }
 
-func ..?<T>(json: JSON, key: String) -> [T]? where T: FromJson {
+public func ..?<T>(json: JSON, key: String) -> [T]? where T: FromJson {
   return json[key]
     .flatMap{ $0 as? Array<Any> }
     .map { $0.compactMap(decodeValue) }
 }
 
-func ..!<T>(json: JSON, key: String) throws -> [T] where T: FromJson {
+public func ..!<T>(json: JSON, key: String) throws -> [T] where T: FromJson {
   return try
     (json ..? key)
     .orThrow { StorkDecodeError.couldNotDecode(field: key) }
@@ -41,6 +41,6 @@ func decodeValue<T>(_ value: Any) -> T? where T: FromJson {
     .flatMap(T.from(value:))
 }
 
-enum StorkDecodeError: Error {
+public enum StorkDecodeError: Error {
   case couldNotDecode(field: String)
 }

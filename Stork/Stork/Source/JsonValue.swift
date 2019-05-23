@@ -7,7 +7,7 @@ import Foundation
  a JSON object can be, following to the JSON specification.
 
 */
-enum JsonValue {
+public enum JsonValue {
   case boolean(Bool)
   case int(Int)
   case number(NSNumber)
@@ -15,7 +15,7 @@ enum JsonValue {
   case object(JSON)
   case array([JsonValue])
 
-  init?(fromAny anyValue: Any) {
+  public  init?(fromAny anyValue: Any) {
     switch anyValue {
     case let value as NSNumber:
       self = value.isBool()
@@ -30,19 +30,19 @@ enum JsonValue {
     }
   }
 
-  func boolValue() -> Bool? {
+  public func boolValue() -> Bool? {
     return self.ifBool(id)
   }
 
-  func numberValue() -> NSNumber? {
+  public func numberValue() -> NSNumber? {
     return self.ifNumber(id)
   }
 
-  func stringValue() -> String? {
+  public func stringValue() -> String? {
     return self.ifString(id)
   }
 
-  func ifBool<T>(_ apply: (Bool) -> T?) -> T? {
+  public func ifBool<T>(_ apply: (Bool) -> T?) -> T? {
     switch self {
     case .boolean(let bool):
       return apply(bool)
@@ -51,7 +51,7 @@ enum JsonValue {
     }
   }
 
-  func ifNumber<T>(_ apply: (NSNumber) -> T?) -> T? {
+  public func ifNumber<T>(_ apply: (NSNumber) -> T?) -> T? {
     switch self {
     case let .number(x):
       return apply(x)
@@ -60,7 +60,7 @@ enum JsonValue {
     }
   }
 
-  func ifObject<T>(_ apply: (JSON) throws -> T?) -> T? {
+  public func ifObject<T>(_ apply: (JSON) throws -> T?) -> T? {
     switch self {
     case .object(let json):
       do { return try apply(json) }
@@ -70,7 +70,7 @@ enum JsonValue {
     }
   }
 
-  func ifString<T>(_ apply: (String) -> T?) -> T? {
+  public func ifString<T>(_ apply: (String) -> T?) -> T? {
     switch self {
     case .string(let str):
       return apply(str)
