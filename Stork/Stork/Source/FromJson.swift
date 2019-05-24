@@ -78,4 +78,14 @@ extension URL: FromJson {
   }
 }
 
+extension Dictionary: FromJson where Key == String, Value: FromJson {
+  public static func from(value: JsonValue) -> Dictionary<Key, Value>? {
+    return value.ifObject { json in
+      json
+        .mapValues { decodeValue($0)! }
+    }
+  }
+}
+
+
 typealias JSON = [String: Any]
