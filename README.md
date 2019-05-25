@@ -118,6 +118,28 @@ See more, unit-tested examples at the [Examples directory](/Stork/StorkTests/Exa
 
 You can add Stork as a dependency to your project via the following ways.
 
+#### [CocoaPods](https://cocoapods.org/)
+
+1. To add Stork to your Xcode project using CocoaPods, add this line to your `Podfile`:
+
+``` ruby
+pod 'StorkEgg', '0.2.1'
+```
+
+<sub><strong>Note:</strong> The pod name is `StorkEgg`, not `Stork` as the latter was already taken.</sub>
+
+2. Then let CocoaPods fetch and install it for you:
+
+``` bash
+pod install
+```
+
+3. Finally, build your project and import Stork:
+
+``` swift
+import Stork
+```
+
 #### Git Submodules
 
 ``` bash
