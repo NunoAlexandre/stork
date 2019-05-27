@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name                  = "StorkEgg"
   s.module_name           = "Stork"
-  s.version               = "0.2.1"
+  s.version               = "0.2.2"
   s.summary               = "Delivering types from JSON like a Stork"
   s.homepage              = "https://github.com/NunoAlexandre/stork"
   s.license               = { :type => "BSD 3", :file => "LICENSE" }
