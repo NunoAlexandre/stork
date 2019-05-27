@@ -137,7 +137,7 @@ pod install
 3. Finally, build your project and import Stork:
 
 ``` swift
-import StorkEgg
+import Stork
 ```
 
 #### Git Submodules
