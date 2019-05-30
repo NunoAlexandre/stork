@@ -57,7 +57,7 @@ extension FromJson where Self: RawRepresentable, Self.RawValue == Int {
     return value
       .numberValue()
       .map { $0.intValue }
-      .flatMap(self.init(rawValue:))
+      .flatMap(Self.init(rawValue:))
   }
 }
 
@@ -65,7 +65,7 @@ extension FromJson where Self: RawRepresentable, Self.RawValue == String {
   public static func from(value: JsonValue) -> Self? {
     return value
       .stringValue()
-      .flatMap(self.init(rawValue:))
+      .flatMap(Self.init(rawValue:))
   }
 }
 
