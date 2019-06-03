@@ -25,6 +25,12 @@ public enum JsonValue {
       self = .string(value)
     case let value as JSON:
       self = .object(value)
+    case let value as [JsonValue]:
+      self = .array(value)
+    case let value as [Any]:
+      self = .array(value.map {
+        JsonValue.init(fromAny: $0)!
+      })
     default:
       return nil
     }
@@ -64,6 +70,16 @@ public enum JsonValue {
     switch self {
     case .object(let json):
       do { return try apply(json) }
+      catch { return nil }
+    default:
+      return nil
+    }
+  }
+
+  public func ifArray<T>(_ apply: ([JsonValue]) throws -> T?) -> T? {
+    switch self {
+    case .array(let jsonValue):
+      do { return try apply(jsonValue) }
       catch { return nil }
     default:
       return nil
